@@ -32,10 +32,37 @@ async function listAll(req: Request, res: Response) {
 
 }
 
+async function deleteUser(req: Request, res: Response) {
+    const userId = Number(req.params.id)
+    try {
+        const result = await userServices.deleteUser(userId)
+        return res.status(StatusCodes.OK).send(`User deleted ${result.rowCount}`)
 
+    } catch (error) {
+        console.error(error);
+        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(error.message)
+    }  
+    
+}
+
+async function updateName(req: Request, res: Response) {
+    const userId = Number(req.params.id)
+    const {name} = req.body as User
+    try {
+        const result = await userServices.updateName(userId, name)
+        return res.status(StatusCodes.OK).send(`User name is updated ${result.rowCount}`)
+
+    } catch (error) {
+        console.error(error);
+        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(error.message)
+    }  
+    
+}
 
 
 export default {
     signup,
-    listAll
+    listAll,
+    deleteUser,
+    updateName
 }

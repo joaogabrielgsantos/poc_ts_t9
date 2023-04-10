@@ -7,4 +7,3 @@ export type UserEntity = {
 
 export type User = Omit<UserEntity, "id">
 
-

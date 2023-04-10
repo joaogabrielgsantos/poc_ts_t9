@@ -18,8 +18,21 @@ const userSchema = joi.object({
             .min(5)
             .max(9)
             .required(),
-    
+
 });
 
+const updateNameSchema = joi.object({
 
-export default userSchema
+    name:
+        joi
+            .string()
+            .min(2)
+            .required(),
+
+})
+
+export default {
+    userSchema,
+    updateNameSchema
+
+}

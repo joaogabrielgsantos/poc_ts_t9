@@ -23,17 +23,30 @@ async function create({ name, email, password }: User): Promise<QueryResult<User
 
 async function listAll(): Promise<QueryResult<UserEntity>> {
     return connectionDb.query(`
-    SELECT * FROM users;
+    SELECT id, name, email FROM users;
     
     `
     );
 }
 
+async function deleteById(userId: number): Promise<QueryResult<UserEntity>> {
+    return connectionDb.query(`
+    DELETE FROM users WHERE "id" = $1;
 
+    `, [userId]);
+}
 
+async function updateById(userId: number, name: string): Promise<QueryResult<UserEntity>> {
+    return connectionDb.query(`
+    UPDATE users SET name = $1 WHERE id = $2;
+    
+    `, [name, userId]);
+}
 
 export default {
     findByEmail,
     create,
-    listAll
+    listAll,
+    deleteById,
+    updateById
 }
