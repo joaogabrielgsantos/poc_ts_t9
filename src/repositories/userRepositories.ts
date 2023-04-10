@@ -12,7 +12,7 @@ async function findByEmail({ email }): Promise<QueryResult<User>> {
     );
 }
 
-async function create({ name, email, password }: User): Promise<QueryResult<User>> {
+async function create({ name, email, password }: User): Promise<QueryResult<UserEntity>> {
     return await connectionDb.query(`
     INSERT INTO users (name, email, password) 
     VALUES ($1, $2, $3);
